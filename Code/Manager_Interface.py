@@ -1,0 +1,2 @@
+# This Python Class will be static, and act as an easy go between for objects that need to be referenced often in various places.
+# This allows for us to avoid tightly coupled code (Passing around values through methods everywhere)
