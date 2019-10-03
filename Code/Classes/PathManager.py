@@ -14,7 +14,7 @@ class PathManager:
         print("Path manager initializing...")
         
         # Stores the root directory of the project.
-        self.ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         
         # Initializes the folder name for the directory that holds the campeign Saves.
         self.campeign_saves_folder = "Campeign_Saves"
@@ -61,3 +61,47 @@ class PathManager:
     
     def get_current_selected_dir(self, parent_dir):
         return os.path.join(parent_dir, self.current_selected_folder)
+    
+    ### FINDING FILES/DIRECTORIES
+        
+    # Finds files in a specified directory with a specified extension.
+    def find_files(self, dir, ext):
+        ext_len = len(ext)
+        
+        files = []
+        
+        for file in os.listdir(dir):
+            if file.endswith(ext):
+                files.append(file)
+        
+        return files
+                
+    
+    # Returns folders in a specified directory
+    def find_folders(self, dir):
+        folders = []
+        for (dirpath, dirnames, filenames) in os.walk(dir):
+            folders.extend(dirnames)
+            break
+
+        return folders
+    
+    ### VALIDATING FILES/DIRECTORIES
+    
+    # Returns True if the file path entered is valid/non-empty
+    def validate_file(self, file_path):
+        if file_path is None:
+            return False
+        elif os.path.exists(file_path):
+            return True
+        else:
+            return False
+        
+    # Returns True si the directory path entered is valid/non-empty
+    def validate_dir(self, dir_path):
+        if dir_path is None:
+            return False
+        elif os.path.isdir(dir_path):
+            return True
+        else:
+            return False
